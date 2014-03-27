@@ -1,7 +1,5 @@
 ########################################################################
 # General purpose aliases
-#
-
 
 ## get rid of command not found
 alias cd..='cd ..'
@@ -32,13 +30,51 @@ alias h='history'
 alias df='df -H'
 alias du='du -ch'
 
-## GIT
+########################################################################
+# Git
+
 alias gprune='git remote prune origin'
 alias gshow='git remote show origin'
+alias gfetch='git fetch --all --prune'
+alias gupdate='git fetch --all --prune ; git remote show | LC_ALL=C xargs -Ixxx /bin/bash -c "git remote show xxx | grep '"'"'(local out of date)'"'"' | awk '"'"'{print \$1}'"'"' | grep -v -Fx \$(git rev-parse --abbrev-ref HEAD) | xargs -I{} git fetch xxx {}:{}"'
+alias gahead='git log @{u}..HEAD --oneline'
+
+########################################################################
+# Docker
+
+alias doruni='docker run -t -i -P'
+dobash() {
+  docker run -t -i -P "$*" /bin/bash
+}
+
+doclean() {
+    echo Zombie containers...
+    CONTAINERS=$(docker ps -a | grep 'ago [ ]*Exit [0-9]\{1,\} '  | awk '{print $1}')
+    if [ -n "$CONTAINERS" ]; then
+        docker rm  $CONTAINERS
+    fi
+
+    echo Unused images...
+    IMAGES=$(docker images -a | grep "^<none>" | awk '{print $3}')
+    if [ -n "$IMAGES" ]; then
+        docker rmi  $IMAGES 2>&1 | grep -v "Error:"
+    fi
+}
+
+dostopall() {
+    CONTAINERS=$(docker ps -q)
+    if [ -n "$CONTAINERS" ]; then
+        docker stop  $CONTAINERS
+    fi
+}
+
+# Completions. These base completions should be installed :
+# https://github.com/dotcloud/docker/blob/master/contrib/completion/bash/docker
+complete -F __docker_image_repos_and_tags doruni
+complete -F __docker_image_repos_and_tags dobash
 
 ########################################################################
 # Sudo
-#
 
 alias svi='sudo vi'
 alias apt="sudo apt-get"
@@ -51,7 +87,6 @@ alias shutdown='sudo /sbin/shutdown'
 ########################################################################
 # Function keys to GIT
 # even faster than aliases !
-#
 
 # F6 -> ~/
 bind '"\e[17~":" ~/"'
