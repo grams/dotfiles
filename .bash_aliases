@@ -6,8 +6,8 @@ alias cd..='cd ..'
  
 ## a quick way to get out of current directory
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 ## cdl -> perform 'ls' after 'cd' if successful.
 cdl() {
@@ -33,11 +33,16 @@ alias du='du -ch'
 ########################################################################
 # Git
 
-alias gprune='git remote prune origin'
-alias gshow='git remote show origin'
+alias gprune='git remote show | xargs git remote prune'
+alias gshow='git remote show | xargs git remote -v show'
 alias gfetch='git fetch --all --prune'
-alias gupdate='git fetch --all --prune ; git remote show | LC_ALL=C xargs -Ixxx /bin/bash -c "git remote show xxx | grep '"'"'(local out of date)'"'"' | awk '"'"'{print \$1}'"'"' | grep -v -Fx \$(git rev-parse --abbrev-ref HEAD) | xargs -I{} git fetch xxx {}:{}"'
+gupdate() {
+    git fetch --all --prune
+    LC_ALL=C git branch -vv  | grep '^[^[]*\[[^]]*: *gone\]' | awk '{print $1}' | grep -v -Fx '*' | xargs -r git branch -d
+    git remote show | LC_ALL=C xargs -r -Ixxx /bin/bash -c "git remote show xxx | grep '(local out of date)' | awk '{print \$1}' | grep -v -Fx \$(git rev-parse --abbrev-ref HEAD) | xargs -r -I{} git fetch xxx {}:{}"
+}
 alias gahead='git log @{u}..HEAD --oneline'
+alias glog='git log --oneline --decorate'
 
 ########################################################################
 # Docker
