@@ -54,7 +54,7 @@ dobash() {
 
 doclean() {
     echo Zombie containers...
-    CONTAINERS=$(docker ps -a | grep 'ago [ ]*Exit [0-9]\{1,\} '  | awk '{print $1}')
+    CONTAINERS=$(docker ps -a | grep 'ago [ ]*Exited '  | awk '{print $1}')
     if [ -n "$CONTAINERS" ]; then
         docker rm  $CONTAINERS
     fi
