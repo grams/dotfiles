@@ -43,13 +43,16 @@ gupdate() {
 }
 alias gahead='git log @{u}..HEAD --oneline'
 alias glog='git log --oneline --decorate'
+gitrebaseallbranches() {
+    git branch | sed -e s/\\*//g | xargs -I {} git config branch.{}.rebase true
+}
 
 ########################################################################
 # Docker
 
 alias doruni='docker run -t -i -P'
 dobash() {
-  docker run -t -i -P "$*" /bin/bash
+  docker run -rm -t -i -P "$*" /bin/bash
 }
 
 doclean() {
