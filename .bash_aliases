@@ -70,7 +70,7 @@ gitrebaseallbranches() {
 
 alias doruni='docker run -t -i -P'
 dobash() {
-  docker run -rm -t -i -P "$*" /bin/bash
+  docker run --rm -t -i -P "$*" /bin/bash
 }
 
 doclean() {
@@ -83,7 +83,7 @@ doclean() {
     echo Unused images...
     IMAGES=$(docker images -a | grep "^<none>" | awk '{print $3}')
     if [ -n "$IMAGES" ]; then
-        docker rmi  $IMAGES 2>&1 | grep -v "Error:"
+        docker rmi  $IMAGES 2>&1 | grep -v "Error"
     fi
 }
 
