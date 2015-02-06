@@ -114,10 +114,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# RBENV
-PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # Control+C devient Control+K
 stty intr \^k
 
+source /home/grs-dw/.oh-my-git/prompt.sh
