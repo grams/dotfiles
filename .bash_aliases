@@ -19,9 +19,14 @@ cl() {
 }
 complete -F _cd cl
 
-## g <file> -> geany <file> &
-g() {
+## gn <file> -> geany <file> &
+gn() {
   (geany "$*" &)
+}
+
+## gd <file> -> gedit <file> &
+gd() {
+  (gedit "$*" &)
 }
 
 ## History
