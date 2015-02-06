@@ -9,14 +9,15 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-## cdl -> perform 'ls' after 'cd' if successful.
-cdl() {
+## cl -> perform 'ls' after 'cd' if successful.
+cl() {
   builtin cd "$*"
   RESULT=$?
   if [ "$RESULT" -eq 0 ]; then
     ls --color=auto -alF
   fi
 }
+complete -F _cd cl
 
 ## g <file> -> geany <file> &
 g() {
