@@ -47,6 +47,18 @@ gupdate() {
     LC_ALL=C git branch -vv  | grep '^[^[]*\[[^]]*: *gone\]' | awk '{print $1}' | grep -v -Fx '*' | xargs -r git branch -d
     git remote show | LC_ALL=C xargs -r -Ixxx /bin/bash -c "git remote show xxx | grep '(local out of date)' | awk '{print \$1}' | grep -v -Fx \$(git rev-parse --abbrev-ref HEAD) | xargs -r -I{} git fetch xxx {}:{}"
 }
+gupdateall() {
+    for D in ` find . -maxdepth 1 -type d | sed -e 's/\.\///g'`
+    do
+        pushd "$D" > /dev/null
+        if [ -d ".git" ]
+        then
+            /bin/echo -----\> $D
+            gupdate
+        fi
+        popd > /dev/null
+    done
+}
 alias gahead='git log @{u}..HEAD --oneline'
 alias glog='git log --oneline --decorate'
 gitrebaseallbranches() {
