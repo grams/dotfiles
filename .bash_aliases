@@ -103,15 +103,16 @@ complete -F __docker_image_repos_and_tags dobash
 # Sudo
 
 alias svi='sudo vi'
-alias apt="sudo apt-get"
+alias apt='sudo apt-get'
 alias su='sudo -i'
 alias reboot='sudo /sbin/reboot'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown'
+alias whatport='sudo netstat -tulpn'
 
 ########################################################################
-# Function keys to GIT
+# Function keys
 # even faster than aliases !
 
 # F6 -> ~/
@@ -125,3 +126,4 @@ bind '"\e[19~":"git status\n"'
 
 # F9 -> git branch
 bind '"\e[20~":"git branch\n"'
+
