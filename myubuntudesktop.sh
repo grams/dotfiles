@@ -32,7 +32,7 @@ apt upgrade -y
 apt-get autoremove -y
 
 # The usual apt suspects
-apt install -y docker-engine gdebi git gitk synaptic
+apt install -y docker-engine gdebi git gitk python-pip synaptic
 
 # The usual python supects
 pip install -U certifi
