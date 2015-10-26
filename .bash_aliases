@@ -26,7 +26,7 @@ gn() {
 
 ## gd <file> -> gedit <file> &
 gd() {
-  (gedit "$*" &)
+  (gedit "$*" 2>&1 | grep -E -v "(Gtk-WARNING)|^$" &)
 }
 
 ## History
