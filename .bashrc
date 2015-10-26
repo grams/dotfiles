@@ -117,4 +117,6 @@ fi
 # Control+C devient Control+K
 stty intr \^k
 
-source /home/grs-dw/.oh-my-git/prompt.sh
+# https://github.com/arialdomartini/oh-my-git
+source ~/.oh-my-git/prompt.sh
+
