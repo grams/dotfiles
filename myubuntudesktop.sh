@@ -22,22 +22,25 @@ installWebDeb() {
 
 codename=`lsb_release -s -c`
 
-# docker
-apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
-
 # apt updates
-apt update
+apt update -qq
 apt upgrade -y
 apt-get autoremove -y
 
-# The usual apt suspects
-apt install -y docker-engine gdebi git gitk python-pip synaptic
+# The usual suspects, you probably need these
+apt install -y gdebi git gitk  synaptic
 
-# The usual python supects
-pip install -U certifi
-pip install -U docker-compose virtualenv
+# Pythons (Monty)
+apt install -y python-pip
+pip install -U certifi #removes warnings for following pip installs
+pip install -U virtualenv
 
+# docker stuff
+apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
+apt update -qq
+apt install -y docker-engine libyaml-dev
+pip install -U docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # google chrome
