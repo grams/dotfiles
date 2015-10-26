@@ -36,7 +36,9 @@ apt install -y docker-engine gdebi git gitk python-pip synaptic
 
 # The usual python supects
 pip install -U certifi
-pip install -U virtualenv
+pip install -U docker-compose virtualenv
+
+chmod +x /usr/local/bin/docker-compose
 
 # google chrome
 installWebDeb /usr/bin google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
