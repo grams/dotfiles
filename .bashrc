@@ -120,3 +120,6 @@ stty intr \^k
 # https://github.com/arialdomartini/oh-my-git
 source ~/.oh-my-git/prompt.sh
 
+# https://github.com/nvbn/thefuck
+eval "$(thefuck --alias TG)"
+
