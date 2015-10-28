@@ -100,6 +100,17 @@ complete -F __docker_image_repos_and_tags doruni
 complete -F __docker_image_repos_and_tags dobash
 
 ########################################################################
+# Dockerized Quick & Dirty services
+
+quick-httpd() {
+    read -p "port [random]: " port
+    if [[ $port ]]; then
+        port=":$port"
+    fi
+    echo docker run -it --rm -v "$PWD":/usr/local/apache2/htdocs/ -p 80$port httpd:2.4
+}
+
+########################################################################
 # Sudo
 
 alias svi='sudo vi'
