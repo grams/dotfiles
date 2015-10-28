@@ -36,6 +36,11 @@ alias h='history'
 alias df='df -H'
 alias du='du -ch'
 
+## Oh, TG !
+alias TG='fuck'
+alias tg!='fuck'
+alias steup='fuck'
+
 ########################################################################
 # Git
 

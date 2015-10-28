@@ -121,5 +121,5 @@ stty intr \^k
 source ~/.oh-my-git/prompt.sh
 
 # https://github.com/nvbn/thefuck
-eval "$(thefuck --alias TG)"
+eval "$(thefuck --alias fuck)"
 
