@@ -9,7 +9,9 @@
 cd ~
 
 # oh-my-git
-if [ ! -d "$HOME/.oh-my-git" ]; then
+if [ -d "$HOME/.oh-my-git" ]; then
+    bash -c 'cd "$HOME/.oh-my-git" && git pull'
+else
     git clone https://github.com/arialdomartini/oh-my-git.git $HOME/.oh-my-git
 fi
 
