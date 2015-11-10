@@ -39,12 +39,12 @@ apt install -y gdebi git gitk synaptic
 apt install -y python-dev python-pip
 pip install -U certifi #removes warnings for following pip installs
 pip install -U pep8 thefuck virtualenv
-pycharm=pycharm-community-4.5.4
+pycharm=pycharm-community-5.0
 if [ ! -e /usr/local/lib/$pycharm ]; then
-    wget https://d1opms6zj7jotq.cloudfront.net/python/$pycharm.tar.gz
+    wget http://download.jetbrains.com/python/$pycharm.tar.gz
     tar xzf $pycharm.tar.gz --directory /usr/local/lib  && rm -f $pycharm.tar.gz
 fi
-
+rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
 
 # docker stuff
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
