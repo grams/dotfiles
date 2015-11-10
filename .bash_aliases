@@ -36,6 +36,11 @@ alias h='history'
 alias df='df -H'
 alias du='du -ch'
 
+## Oh, TG !
+alias TG='fuck'
+alias tg!='fuck'
+alias steup='fuck'
+
 ########################################################################
 # Git
 
@@ -98,6 +103,17 @@ dostopall() {
 # https://github.com/dotcloud/docker/blob/master/contrib/completion/bash/docker
 complete -F __docker_image_repos_and_tags doruni
 complete -F __docker_image_repos_and_tags dobash
+
+########################################################################
+# Dockerized Quick & Dirty services
+
+quick-httpd() {
+    read -p "port [random]: " port
+    if [[ $port ]]; then
+        port=":$port"
+    fi
+    echo docker run -it --rm -v "$PWD":/usr/local/apache2/htdocs/ -p 80$port httpd:2.4
+}
 
 ########################################################################
 # Sudo
