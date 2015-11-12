@@ -4,6 +4,11 @@
 # bash <(curl -L https://github.com/grams/dotfiles/raw/master/myubuntudesktop.sh)
 #
 
+# Unofficial Bash Strict Mode
+set -euo pipefail
+IFS=$'\n\t'
+
+# Must be root.
 id=`id -u`
 if [ $id -ne 0 ]; then
     clear
@@ -25,26 +30,46 @@ installWebDeb() {
     fi
 }
 
+desktop=false
+ovh=false
+while [[ $# > 0 ]]
+do
+    key="$1"
+
+    echo $key
+    case $key in
+        -d|--desktop)
+        desktop=true
+        shift
+        ;;
+        -o|--ovh)
+        ovh=true
+        shift
+        ;;
+        *)
+        shift 
+        ;;
+    esac
+done
+
 codename=`lsb_release -s -c` # e.g. "trusty"
 
+##############################
+# Basic Ubuntu
+#
+
 # apt updates
-apt update -qq
+apt update -q
 apt upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt install -y gdebi git gitk synaptic
+apt install -y gdebi git 
 
 # Pythonic stuff (this script is getting too silly)
 apt install -y python-dev python-pip
 pip install -U certifi #removes warnings for following pip installs
 pip install -U pep8 thefuck virtualenv
-pycharm=pycharm-community-5.0
-if [ ! -e /usr/local/lib/$pycharm ]; then
-    wget http://download.jetbrains.com/python/$pycharm.tar.gz
-    tar xzf $pycharm.tar.gz --directory /usr/local/lib  && rm -f $pycharm.tar.gz
-fi
-rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
 
 # docker stuff
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -53,12 +78,37 @@ apt update -qq
 apt install -y docker-engine libyaml-dev
 pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
 
-# google chrome
-installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
+##############################
+# Ubuntu Desktop
+#
+if [ "$desktop" = true ] ; then
 
-# tigerVNC
-installWebDeb /usr/bin tigervncserver https://bintray.com/artifact/download/tigervnc/stable/ubuntu-14.04LTS/amd64 tigervncserver_1.5.0-3ubuntu1_amd64.deb
+    # The usual suspects, I always end up installing
+    apt install -y gedit gitk synaptic terminator
 
-# mysql-workbench
-apt install -y mysql-workbench
+    # google chrome
+    installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
+
+    # PyCharm
+    pycharm=pycharm-community-5.0
+    if [ ! -e /usr/local/lib/$pycharm ]; then
+        wget http://download.jetbrains.com/python/$pycharm.tar.gz
+        tar xzf $pycharm.tar.gz --directory /usr/local/lib  && rm -f $pycharm.tar.gz
+    fi
+    rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
+
+    # other useful stuff
+    apt install -y filezilla mysql-workbench
+    
+fi #desktop
+
+##############################
+# OVH remote desktop
+#
+if [ "$ovh" = true ] ; then
+
+    # tigerVNC
+    installWebDeb /usr/bin tigervncserver https://bintray.com/artifact/download/tigervnc/stable/ubuntu-14.04LTS/amd64 tigervncserver_1.5.0-3ubuntu1_amd64.deb
+    
+fi #ovh
 
