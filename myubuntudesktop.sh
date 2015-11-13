@@ -59,22 +59,22 @@ codename=`lsb_release -s -c` # e.g. "trusty"
 #
 
 # apt updates
+apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
+
 apt update -q
 apt upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt install -y gdebi git 
+apt install -y gcc gdebi git openjdk-7-jdk 
 
 # Pythonic stuff (this script is getting too silly)
 apt install -y python-dev python-pip
 pip install -U certifi #removes warnings for following pip installs
-pip install -U pep8 thefuck virtualenv
+pip install -U awscli boto3 git-up pep8 thefuck virtualenv
 
 # docker stuff
-apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
-apt update -qq
 apt install -y docker-engine libyaml-dev
 pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
 
@@ -82,6 +82,10 @@ pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
 # Ubuntu Desktop
 #
 if [ "$desktop" = true ] ; then
+
+    # apt updates
+    add-apt-repository -y ppa:webupd8team/mate # mate-dock-applet
+    apt update -qq
 
     # The usual suspects, I always end up installing
     apt install -y gedit gitk synaptic terminator
@@ -98,7 +102,7 @@ if [ "$desktop" = true ] ; then
     rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
 
     # other useful stuff
-    apt install -y filezilla mysql-workbench
+    apt install -y filezilla mate-dock-applet mysql-workbench
     
 fi #desktop
 
