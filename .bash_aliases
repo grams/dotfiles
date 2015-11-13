@@ -35,6 +35,7 @@ alias h='history'
 ## Defaut args
 alias df='df -H'
 alias du='du -ch'
+alias ls='ls --color=auto -h'
 
 ## Oh, TG !
 alias TG='fuck'
