@@ -62,20 +62,20 @@ codename=`lsb_release -s -c` # e.g. "trusty"
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
 
-apt update -q
-apt upgrade -y
+apt-get update -q
+apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt install -y gcc gdebi git openjdk-7-jdk 
+apt-get install -y gcc gdebi git openjdk-7-jdk openjdk-8-jdk
 
 # Pythonic stuff (this script is getting too silly)
-apt install -y python-dev python-pip
+apt-get install -y python-dev python-pip
 pip install -U certifi #removes warnings for following pip installs
 pip install -U awscli boto3 git-up pep8 thefuck virtualenv
 
 # docker stuff
-apt install -y docker-engine libyaml-dev
+apt-get install -y docker-engine libyaml-dev
 pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
 
 ##############################
@@ -85,10 +85,10 @@ if [ "$desktop" = true ] ; then
 
     # apt updates
     add-apt-repository -y ppa:webupd8team/mate # mate-dock-applet
-    apt update -qq
+    apt-get update -qq
 
     # The usual suspects, I always end up installing
-    apt install -y gedit gitk synaptic terminator
+    apt-get install -y gedit gitk synaptic terminator
 
     # google chrome
     installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
@@ -102,7 +102,7 @@ if [ "$desktop" = true ] ; then
     rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
 
     # other useful stuff
-    apt install -y filezilla mate-dock-applet mysql-workbench
+    apt-get install -y filezilla mate-dock-applet mysql-workbench sikuli-ide
     
 fi #desktop
 
