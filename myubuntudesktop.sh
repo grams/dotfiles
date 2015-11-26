@@ -67,7 +67,7 @@ apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc gdebi git openjdk-7-jdk openjdk-8-jdk
+apt-get install -y gcc gdebi-core git openjdk-7-jdk openjdk-8-jdk
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip
@@ -102,7 +102,7 @@ if [ "$desktop" = true ] ; then
     rm -f /usr/local/bin/pycharm && ln -s /usr/local/lib/$pycharm/bin/pycharm.sh /usr/local/bin/pycharm
 
     # other useful stuff
-    apt-get install -y filezilla mate-dock-applet mysql-workbench sikuli-ide
+    apt-get install -y filezilla mate-dock-applet mysql-workbench
     
 fi #desktop
 
