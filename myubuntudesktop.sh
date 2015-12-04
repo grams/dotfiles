@@ -62,8 +62,7 @@ codename=`lsb_release -s -c` # e.g. "trusty"
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
 
-apt-get update -q
-apt-get upgrade -y
+apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
@@ -77,6 +76,12 @@ pip install -U awscli boto3 git-up pep8 thefuck virtualenv
 # docker stuff
 apt-get install -y docker-engine libyaml-dev
 pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
+
+# JavaScript :'-(
+curl -sL https://deb.nodesource.com/setup_4.x | bash -
+apt-get update -qq && apt-get upgrade -y
+apt-get install -y nodejs
+npm install -g grunt-cli
 
 ##############################
 # Ubuntu Desktop
