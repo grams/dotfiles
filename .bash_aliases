@@ -75,6 +75,8 @@ gitrebaseallbranches() {
 # Docker
 
 alias doruni='docker run -t -i -P'
+alias docker-recompose='docker-compose rm -f && docker-compose build && docker-compose up'
+
 dobash() {
   docker run --rm -t -i -P "$*" /bin/bash
 }
