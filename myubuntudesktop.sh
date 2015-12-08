@@ -66,7 +66,7 @@ apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc gdebi-core git openjdk-7-jdk openjdk-8-jdk
+apt-get install -y gcc ansible gdebi-core git maven openjdk-7-jdk openjdk-8-jdk
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip
