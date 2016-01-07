@@ -99,7 +99,7 @@ if [ "$desktop" = true ] ; then
     installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
 
     # PyCharm
-    pycharm=pycharm-community-5.0.2
+    pycharm=pycharm-community-5.0.3
     if [ ! -e /usr/local/lib/$pycharm ]; then
         wget http://download.jetbrains.com/python/$pycharm.tar.gz
         tar xzf $pycharm.tar.gz --directory /usr/local/lib  && rm -f $pycharm.tar.gz
