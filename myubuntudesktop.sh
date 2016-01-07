@@ -69,7 +69,7 @@ apt-get autoremove -y
 apt-get install -y gcc ansible dos2unix gdebi-core git maven openjdk-7-jdk openjdk-8-jdk
 
 # Pythonic stuff (this script is getting too silly)
-apt-get install -y python-dev python-pip
+apt-get install -y python-dev python-pip python-openssl
 pip install -U certifi #removes warnings for following pip installs
 pip install -U awscli boto3 git-up pep8 thefuck virtualenv
 
