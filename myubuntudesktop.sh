@@ -70,12 +70,15 @@ apt-get install -y gcc ansible dos2unix gdebi-core git maven openjdk-7-jdk openj
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip python-openssl
-pip install -U certifi #removes warnings for following pip installs
-pip install -U awscli boto3 git-up pep8 thefuck virtualenv
+pip install -U pip certifi #removes warnings for following pip installs
+pip install -U awscli boto3 pep8 thefuck virtualenv
 
 # docker stuff
 apt-get install -y docker-engine libyaml-dev
 pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
+
+# Python...
+pip install -U git-up # fixes The 'six==1.9.0' distribution was not found and is required by git-up
 
 # JavaScript :'-(
 curl -sL https://deb.nodesource.com/setup_4.x | bash -
