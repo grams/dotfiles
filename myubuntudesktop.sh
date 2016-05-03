@@ -86,6 +86,15 @@ apt-get update -qq && apt-get upgrade -y
 apt-get install -y nodejs
 npm install -g grunt-cli
 
+# Packer
+packerzip=packer_0.10.0_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/0.10.0/$packerzip
+unzip -u -o $packerzip -d /usr/local/bin
+rm -f $packerzip
+
+# And all the rest...
+apt-get install -y linkchecker
+
 ##############################
 # Ubuntu Desktop
 #
