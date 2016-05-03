@@ -105,7 +105,7 @@ if [ "$desktop" = true ] ; then
     apt-get update -qq
 
     # The usual suspects, I always end up installing
-    apt-get install -y gedit gitk synaptic terminator
+    apt-get install -y gedit gitk meld synaptic terminator
 
     # google chrome
     installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
