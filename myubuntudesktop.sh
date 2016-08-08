@@ -47,7 +47,7 @@ do
         shift
         ;;
         *)
-        shift 
+        shift
         ;;
     esac
 done
@@ -66,7 +66,7 @@ apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc ansible dos2unix gdebi-core git maven openjdk-7-jdk openjdk-8-jdk
+apt-get install -y gcc ansible dos2unix gdebi-core git maven openjdk-8-jdk shellcheck ec2-api-tools
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip python-openssl
@@ -87,8 +87,8 @@ apt-get install -y nodejs
 npm install -g grunt-cli
 
 # Packer
-packerzip=packer_0.10.0_linux_amd64.zip
-wget https://releases.hashicorp.com/packer/0.10.0/$packerzip
+packerzip=packer_0.10.1_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/0.10.1/$packerzip
 unzip -u -o $packerzip -d /usr/local/bin
 rm -f $packerzip
 
@@ -112,7 +112,7 @@ if [ "$desktop" = true ] ; then
 
     # other useful stuff
     apt-get install -y filezilla mate-dock-applet mysql-workbench
-    
+
 fi #desktop
 
 ##############################
@@ -122,6 +122,5 @@ if [ "$ovh" = true ] ; then
 
     # tigerVNC
     installWebDeb /usr/bin tigervncserver https://bintray.com/artifact/download/tigervnc/stable/ubuntu-14.04LTS/amd64 tigervncserver_1.5.0-3ubuntu1_amd64.deb
-    
-fi #ovh
 
+fi #ovh
