@@ -3,7 +3,7 @@
 # for examples
 
 # Path
-PATH=~/.dotfiles/scripts:$PATH
+PATH=$PATH:$HOME/bin
 
 # If not running interactively, don't do anything
 case $- in
@@ -126,3 +126,4 @@ source ~/.oh-my-git/prompt.sh
 # https://github.com/nvbn/thefuck
 eval "$(thefuck --alias fuck)"
 
+ssh-add ~/.pem/*.pem 2> /dev/null
