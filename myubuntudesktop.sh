@@ -66,7 +66,7 @@ apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc ansible dos2unix gdebi-core git maven openjdk-8-jdk shellcheck ec2-api-tools
+apt-get install -y gcc ansible dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip python-openssl
@@ -87,8 +87,8 @@ apt-get install -y nodejs
 npm install -g grunt-cli
 
 # Packer
-packerzip=packer_0.10.1_linux_amd64.zip
-wget https://releases.hashicorp.com/packer/0.10.1/$packerzip
+packerzip=packer_0.12.0_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/0.12.0/$packerzip
 unzip -u -o $packerzip -d /usr/local/bin
 rm -f $packerzip
 
@@ -105,7 +105,7 @@ if [ "$desktop" = true ] ; then
     apt-get update -qq
 
     # The usual suspects, I always end up installing
-    apt-get install -y gedit gitk meld synaptic terminator
+    apt-get install -y gedit gitk meld synaptic terminator xclip
 
     # google chrome
     installWebDeb /opt/google/chrome google-chrome https://dl.google.com/linux/direct google-chrome-stable_current_amd64.deb
