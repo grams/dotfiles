@@ -51,5 +51,3 @@ shortCut() {
       fi
     fi
 }
-
-shortCut ~/pycharm/bin pycharm.sh
