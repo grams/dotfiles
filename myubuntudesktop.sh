@@ -62,14 +62,16 @@ codename=`lsb_release -s -c` # e.g. "trusty"
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
 
+add-apt-repository -y ppa:fkrull/deadsnakes
+
 apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc ansible dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools
+apt-get install -y gcc ansible dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools pv
 
 # Pythonic stuff (this script is getting too silly)
-apt-get install -y python-dev python-pip python-openssl
+apt-get install -y python-dev python-pip python-openssl python3-dev python3 python3.6 python3.6-dev python3.6-venv
 pip install -U pip certifi #removes warnings for following pip installs
 pip install -U awscli boto3 pep8 thefuck virtualenv
 
@@ -87,8 +89,8 @@ apt-get install -y nodejs
 npm install -g grunt-cli
 
 # Packer
-packerzip=packer_0.12.0_linux_amd64.zip
-wget https://releases.hashicorp.com/packer/0.12.0/$packerzip
+packerzip=packer_0.12.1_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/0.12.1/$packerzip
 unzip -u -o $packerzip -d /usr/local/bin
 rm -f $packerzip
 
