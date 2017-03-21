@@ -16,3 +16,4 @@ fi
 git config --global push.default simple
 git config --global rerere.enabled true
 git config --global rerere.autoupdate true
+git config --global status.submoduleSummary true

@@ -126,4 +126,7 @@ source ~/.oh-my-git/prompt.sh
 # https://github.com/nvbn/thefuck
 eval "$(thefuck --alias fuck)"
 
+if ! ps xo stat,comm | grep ssh-agent | grep -q '[RS]'; then
+  ssh-agent > /dev/null
+fi
 ssh-add ~/.pem/*.pem 2> /dev/null
