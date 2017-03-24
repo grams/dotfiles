@@ -3,7 +3,7 @@
 
 ## get rid of command not found
 alias cd..='cd ..'
- 
+
 ## a quick way to get out of current directory
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -149,7 +149,6 @@ bind '"\e[20~":"git branch\n"'
 ########################################################################
 # Misc aliases
 
-jmeterslave() {
-    ssh -L 2400$1:127.0.0.1:2400$1 -L 2600$1:127.0.0.1:2600$1 -R 25000:127.0.0.1:25000 -4 jmeter@jmeter-slave-$1
+clip() {
+    cat $1 |xclip -i -selection clipboard
 }
-
