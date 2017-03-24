@@ -68,7 +68,7 @@ apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc ansible dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools pv
+apt-get install -y gcc dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools pv
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip python-openssl python3-dev python3 python3.6 python3.6-dev python3.6-venv
@@ -95,7 +95,7 @@ unzip -u -o $packerzip -d /usr/local/bin
 rm -f $packerzip
 
 # And all the rest...
-apt-get install -y linkchecker
+apt-get install -y linkchecker php php-mysql php-xdebug ansible
 
 ##############################
 # Ubuntu Desktop
