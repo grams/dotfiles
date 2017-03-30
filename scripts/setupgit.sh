@@ -17,3 +17,7 @@ git config --global push.default simple
 git config --global rerere.enabled true
 git config --global rerere.autoupdate true
 git config --global status.submoduleSummary true
+git config --global core.excludesfile ~/.gitignore
+cat >> ~/.gitignore <<EOF
+.idea
+EOF
