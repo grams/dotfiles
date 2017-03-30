@@ -3,7 +3,7 @@
 # for examples
 
 # Path
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/bin:$HOME/.gocode/bin
 
 # If not running interactively, don't do anything
 case $- in
@@ -126,6 +126,10 @@ source ~/.oh-my-git/prompt.sh
 # https://github.com/nvbn/thefuck
 eval "$(thefuck --alias fuck)"
 
+# Go
+export GOPATH=~/.gocode
+
+# SSH-agent
 if ! ps xo stat,comm | grep ssh-agent | grep -q '[RS]'; then
   ssh-agent > /dev/null
 fi

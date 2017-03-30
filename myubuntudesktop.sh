@@ -62,7 +62,9 @@ codename=`lsb_release -s -c` # e.g. "trusty"
 apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
 
-add-apt-repository -y ppa:fkrull/deadsnakes
+# Addl repos for Ubuntu 16
+add-apt-repository -y ppa:fkrull/deadsnakes #Python
+add-apt-repository -y ppa:longsleep/golang-backports #Go
 
 apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
@@ -81,6 +83,9 @@ pip install -U docker-compose && chmod +x /usr/local/bin/docker-compose
 
 # Python...
 pip install -U git-up # fixes The 'six==1.9.0' distribution was not found and is required by git-up
+
+# Go...
+apt-get install -y golang-go
 
 # JavaScript :'-(
 curl -sL https://deb.nodesource.com/setup_4.x | bash -
