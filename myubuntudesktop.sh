@@ -12,7 +12,7 @@ IFS=$'\n\t'
 id=`id -u`
 if [ $id -ne 0 ]; then
     clear
-    echo "Please run as root."
+    echo "Please run as root, with sudo -H"
     exit 1
 fi
 
@@ -30,29 +30,16 @@ installWebDeb() {
     fi
 }
 
-desktop=false
-ovh=false
-while [[ $# > 0 ]]
-do
-    key="$1"
-
-    echo $key
-    case $key in
-        -d|--desktop)
-        desktop=true
-        shift
-        ;;
-        -o|--ovh)
-        ovh=true
-        shift
-        ;;
-        *)
-        shift
-        ;;
-    esac
-done
-
 codename=`lsb_release -s -c` # e.g. "trusty"
+
+set +e
+wmctrl -m > /dev/null
+if [ $? -eq 0 ]; then
+    desktop=true
+else
+    desktop=false
+fi
+set -e
 
 ##############################
 # Basic Ubuntu
@@ -65,12 +52,13 @@ echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/s
 # Addl repos for Ubuntu 16
 add-apt-repository -y ppa:fkrull/deadsnakes #Python
 add-apt-repository -y ppa:longsleep/golang-backports #Go
+add-apt-repository -y ppa:openjdk-r/ppa # OpenJDK 7
 
 apt-get update -q && apt-get upgrade -y
 apt-get autoremove -y
 
 # The usual suspects, I always end up installing
-apt-get install -y gcc dos2unix gdebi-core git unzip maven openjdk-8-jdk shellcheck ec2-api-tools pv
+apt-get install -y gcc dos2unix gdebi-core git unzip maven openjdk-7-jdk openjdk-8-jdk shellcheck ec2-api-tools pv
 
 # Pythonic stuff (this script is getting too silly)
 apt-get install -y python-dev python-pip python-openssl python3-dev python3 python3.6 python3.6-dev python3.6-venv
@@ -94,8 +82,9 @@ apt-get install -y nodejs
 npm install -g grunt-cli
 
 # Packer
-packerzip=packer_0.12.1_linux_amd64.zip
-wget https://releases.hashicorp.com/packer/0.12.1/$packerzip
+packerversion=1.0.3
+packerzip=packer_"$packerversion"_linux_amd64.zip
+wget https://releases.hashicorp.com/packer/$packerversion/$packerzip
 unzip -u -o $packerzip -d /usr/local/bin
 rm -f $packerzip
 
@@ -121,13 +110,3 @@ if [ "$desktop" = true ] ; then
     apt-get install -y filezilla mate-dock-applet mysql-workbench
 
 fi #desktop
-
-##############################
-# OVH remote desktop
-#
-if [ "$ovh" = true ] ; then
-
-    # tigerVNC
-    installWebDeb /usr/bin tigervncserver https://bintray.com/artifact/download/tigervnc/stable/ubuntu-14.04LTS/amd64 tigervncserver_1.5.0-3ubuntu1_amd64.deb
-
-fi #ovh
